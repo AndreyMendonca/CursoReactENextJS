@@ -1,6 +1,7 @@
 "use client"
 
 import { CustomButton } from "@/components/CustomButton";
+import { Person } from "@/types/Person";
 import { FormEvent, useState } from "react";
 
 const Page = () =>{
@@ -8,6 +9,8 @@ const Page = () =>{
   const [count, setCount] = useState<number>(0);
 
   const [name, setName] = useState<string>("");
+
+  const [fullName, setFullName] = useState<Person>({name:'', lastName:''});
 
   function handleClick(){
     alert("funcionou");
@@ -30,8 +33,12 @@ const Page = () =>{
     setCount(count+1)
   }
 
+  const handleLimparFullName = () =>{
+    setFullName({name: '', lastName: ''})
+  }
+
   return (
-    <div className="h-screen w-screen">
+    <div className="container mx-auto">
       <div className="flex justify-center items-center m-2">
         <button onClick={handleClick} className="bg-blue-700 p-3 text-white rounded-md cursor-pointer">Clique aqui</button>
         <button onClick={() => handleClick2('Clique no botão 2')} className="ml-2 bg-amber-400 p-3 text-white rounded-md cursor-pointer">Clique aqui 2</button>
@@ -59,6 +66,25 @@ const Page = () =>{
           onChange={(e) => setName(e.target.value)}
         />
         <p>Nome: {name}</p>
+      </div>
+      <div className="border-2 p-2">
+        <h1>UseState em objetos</h1>
+        <input 
+          type="text" 
+          placeholder="Escreva o primeiro nome"
+          className="border p-2"
+          value={fullName.name}
+          onChange={e=> setFullName({...fullName, name: e.target.value})}
+        />
+        <input 
+          type="text" 
+          placeholder="Escreva o sobrenome"
+          className="border p-2 ml-2"
+          value={fullName.lastName}
+          onChange={(e)=> setFullName({...fullName, lastName: e.target.value})}
+        />
+        <p>Nome: {fullName.name} - Sobrenome: {fullName.lastName}</p>
+        <button onClick={handleLimparFullName} className="ml-2 bg-red-500 p-3 text-white rounded-md cursor-pointer">Limpar nome</button>
       </div>
     </div>
   )
