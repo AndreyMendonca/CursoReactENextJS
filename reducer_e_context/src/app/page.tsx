@@ -25,6 +25,28 @@ const Page = () => {
     })
   }
 
+  const handleEdit = (id: number) =>{
+    const item = list.find(it => it.id === id);
+    
+    if(!item) return false;
+
+    const newText = window.prompt('Editar Tarefa', item.text);
+    if(!newText || newText.trim() === '') return false;
+
+    dispatch({
+      type: 'editText',
+      payload: {id, newText}
+    })
+  }
+
+  const handleDelete = (id: number)=>{
+    if(!window.confirm('Tem certeza que deseja excluir')) return false
+    dispatch({
+      type:'remove',
+      payload:{id}
+    });
+  }
+
   return (
     <div className="container mx-auto">
       <h1 className="text-center text-4xl">Lista de tarefas</h1>
@@ -50,8 +72,8 @@ const Page = () => {
               checked={item.done}
             />
             <p className="flex-1 text-lg">{item.text}</p>
-            <button className="mx-4 cursor-pointer hover:text-gray-500">Editar</button>
-            <button className="mx-4 cursor-pointer hover:text-gray-500">Excluir</button>
+            <button onClick={() => handleEdit(item.id)} className="mx-4 cursor-pointer hover:text-gray-500">Editar</button>
+            <button onClick={() => handleDelete(item.id)} className="mx-4 cursor-pointer hover:text-gray-500">Excluir</button>
           </li>
         ))}
       </ul>
