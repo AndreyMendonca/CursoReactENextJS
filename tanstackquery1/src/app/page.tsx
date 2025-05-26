@@ -1,8 +1,9 @@
 "use client"
-import { usePost, usePosts } from "@/utils/queries";
+import { usePost, usePosts, useUsersPrefetch } from "@/utils/queries";
 import { useState } from "react";
 
 const Page = () =>{
+  useUsersPrefetch();
   const [canLoadPosts, setCanLoadPosts] = useState(false);
   const posts = usePosts(canLoadPosts);
   const postItem = usePost(10);
