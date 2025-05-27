@@ -1,20 +1,25 @@
 "use client"
-import { usePost, usePosts, useUsersPrefetch } from "@/utils/queries";
+import { invalidadePosts, usePost, usePosts, useUsersPrefetch } from "@/utils/queries";
 import { useState } from "react";
 
-const Page = () =>{
+const Page = () => {
   useUsersPrefetch();
   const [canLoadPosts, setCanLoadPosts] = useState(false);
   const posts = usePosts(canLoadPosts);
   const postItem = usePost(10);
-  
-  const handleLoadPostsButton = () =>{
+
+  const handleLoadPostsButton = () => {
     setCanLoadPosts(true);
+  }
+
+  const handleInvalidadePostButton = () => {
+    invalidadePosts();
   }
 
   return (
     <div className="container mx-auto">
       <button onClick={handleLoadPostsButton} className="border p-3 rounded-md m-3">Carregar posts</button>
+      <button onClick={handleInvalidadePostButton} className="border p-3 rounded-md m-3">Invalidar posts</button>
       {posts.isLoading && 'Carregando...'}
       {posts.isFetched && 'RECarregando...'}
       {posts.data &&

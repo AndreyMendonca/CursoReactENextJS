@@ -61,3 +61,11 @@ export const useUsersPrefetch = () =>{
         queryFn: getUsers
     });
 }
+
+export const invalidadePosts = () =>{
+    queryClient.invalidateQueries({
+        queryKey: ['posts'],
+        exact: true
+    })
+}
+//invalidar query. Caso não use o exact, ele vai invalidar tudo que tem a query posts
