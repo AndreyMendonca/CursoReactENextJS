@@ -19,7 +19,19 @@ const Page = () => {
   }
 
   const addMutation = useMutation({
-    mutationFn: addPost
+    mutationFn: addPost,
+    onMutate: (data) =>{
+      console.log('dados da mutation', data)
+    },
+    onError: (error, data, context) => {
+      console.log('pode adicionar a logica de quando der erro')
+    },
+    onSuccess: (retorno, data, context) => {
+      console.log('logica de sucesso')
+    },
+    onSettled: (retorno, erro, context) =>{
+      console.log('Independente se dar erro ou nao, ele sempre executará essa código')
+    }
   })
 
   const handleAddButton = () => {
@@ -35,6 +47,7 @@ const Page = () => {
       <button onClick={handleLoadPostsButton} className="border p-3 rounded-md m-3">Carregar posts</button>
       <button onClick={handleInvalidadePostButton} className="border p-3 rounded-md m-3">Invalidar posts</button>
       <button onClick={handleAddButton} className="border p-3 rounded-md m-3">Adicionar posts</button>
+      <p onClick={() => addMutation.reset()}>Status Mutation: {addMutation.status}</p>
       {posts.isLoading && 'Carregando...'}
       {posts.isFetched && 'RECarregando...'}
       {posts.data &&
