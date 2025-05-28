@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 
 const Page = () => {
   const {
+    setValue,
     control,
     handleSubmit
   } = useForm<SignUpForm>();
@@ -36,6 +37,7 @@ const Page = () => {
 
         <input type="submit" value='enviar' />
       </form>
+      <button onClick={()=> setValue('age',18)}>Definir como maior de idade</button>
     </div>
   )
 }
