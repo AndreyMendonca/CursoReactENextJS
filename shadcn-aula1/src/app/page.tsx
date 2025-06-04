@@ -1,3 +1,4 @@
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 
@@ -15,6 +16,7 @@ const Page = () => {
           </div>
         </Alert>
       </div>
+      <ThemeToggle/>
     </div>
   )
 }
