@@ -1,5 +1,6 @@
 import { Logo } from "@/components/logo"
-import { ThemeToggle } from "./theme-toggle"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { CartSideBar } from "@/components/cart/sidebar"
 
 export const Header = () => {
     return (
@@ -9,7 +10,7 @@ export const Header = () => {
                 <ThemeToggle/>
             </div>
             <div className="">
-                ...
+                <CartSideBar/>
             </div>
         </header>
     )
