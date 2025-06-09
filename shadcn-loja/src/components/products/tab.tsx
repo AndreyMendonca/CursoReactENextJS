@@ -12,10 +12,10 @@ export const ProductsTab = () => {
                     Tab2
                 </TabsTrigger>
             </TabsList>
-            <TabsContent value="tab1">
+            <TabsContent value="tab1" className="mt-6">
                 Tab1
             </TabsContent>
-            <TabsContent value="tab2">
+            <TabsContent value="tab2" className="mt-6">
                 Tab2
             </TabsContent>
         </Tabs>
