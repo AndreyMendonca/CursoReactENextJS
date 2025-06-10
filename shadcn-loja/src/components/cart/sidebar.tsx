@@ -5,8 +5,11 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Separator } from "@/components/ui/separator"
 import { useCartStore } from "@/store/cart-store"
 import { CartItem } from "./item"
+import { useState } from "react"
+import { CheckoutDialog } from "../checkout.tsx/dialog"
 
 export const CartSideBar = () => {
+    const [checkoutOpen, setCheckoutOpen] = useState(false);
 
     const {cart} = useCartStore(state => state);
 
@@ -49,10 +52,15 @@ export const CartSideBar = () => {
                     <Separator className="my-4" />
                     <div className="text-center">
                         <Button
+                            onClick={() => setCheckoutOpen(true)}
                             disabled={subtotal === 0}
                         >Finalizar</Button>
                     </div>
                 </div>
+                <CheckoutDialog 
+                    open={checkoutOpen}
+                    onOpenChange={setCheckoutOpen}
+                />
             </SheetContent>
         </Sheet>
     )
