@@ -5,7 +5,7 @@ type States = {
     address: {
         street: string;
         number: string;
-        complemento?: string | undefined;
+        complement?: string | undefined;
         district: string;
         city: string;
         state: string;
@@ -13,16 +13,16 @@ type States = {
 }
 
 type Actions = {
-    setName: (name: State["name"]) => void;
-    setAddress: (address: State["address"]) => void;
+    setName: (name: States["name"]) => void;
+    setAddress: (address: States["address"]) => void;
 }
 
-const initialState: State = {
+const initialState: States = {
     name: '',
     address: {
         street: '',
         number: '',
-        complemento: '',
+        complement: '',
         district:'',
         city: '',
         state: ''

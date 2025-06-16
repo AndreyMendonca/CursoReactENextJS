@@ -41,13 +41,13 @@ export const StepAddress = ({ setStep }: Props) => {
                 <div className="grid grid-cols-2 gap-4">
                     <FormField
                         control={form.control}
-                        name="number"
+                        name="street"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Número</FormLabel>
+                                <FormLabel>Endereço</FormLabel>
                                 <FormControl>
                                     <Input
-                                        placeholder="Qual seu número"
+                                        placeholder="Qual seu endereço"
                                         {...field}
                                     />
                                 </FormControl>
