@@ -1,8 +1,10 @@
 'use client'
 import axios from "axios";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
 
 export const Form = () => {
+    const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
     const [selectedFile, setSelectedFile] = useState<File>();
     const [legend, setLegend] = useState("");
     const [progressUpload, setProgressUpload] = useState(0);
@@ -26,7 +28,7 @@ export const Form = () => {
 
             const req = await axios.post(url, formData, {
                 onUploadProgress: (progressEvent) => {
-                    if(progressEvent.total){
+                    if (progressEvent.total) {
                         const pct = (progressEvent.loaded / progressEvent.total) * 100;
                         setProgressUpload(pct);
                     }
@@ -51,8 +53,38 @@ export const Form = () => {
         }
     }
 
+    const handleDropzoneSubmit = async () => {
+        const formData = new FormData();
+        formData.append('file', acceptedFiles[0]);
+        formData.append('legend', legend);
+
+        const url = 'https://b7web.com.br/uploadtest/'
+
+        const req = await axios.post(url, formData, {
+            onUploadProgress: (progressEvent) => {
+                if (progressEvent.total) {
+                    const pct = (progressEvent.loaded / progressEvent.total) * 100;
+                    setProgressUpload(pct);
+                }
+            }
+        });
+    }
+
+    useEffect(() => {
+        if (acceptedFiles.length > 0) {
+            setSelectedFile(acceptedFiles[0]);
+            handleDropzoneSubmit();
+        }
+    }, [acceptedFiles])
+
     return (
         <div>
+            <div className="bg-gray-400 h-96 p-5" {...getRootProps()}>
+                <input {...getInputProps()} />
+            </div>
+
+            <div>ARQUIVOS: {acceptedFiles.length}</div>
+
             <input
                 type="file"
                 className="block my-3 p-2 border"
@@ -67,7 +99,7 @@ export const Form = () => {
                 Enviar
             </button>
             <div className="w-[500px] h-5 bg-green-200">
-                <div className="h-5 bg-green-800" style={{width: progressUpload +'%'}}></div>
+                <div className="h-5 bg-green-800" style={{ width: progressUpload + '%' }}></div>
 
             </div>
 
