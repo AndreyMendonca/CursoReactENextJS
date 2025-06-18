@@ -8,6 +8,7 @@ export const Form = () => {
     const [selectedFile, setSelectedFile] = useState<File>();
     const [legend, setLegend] = useState("");
     const [progressUpload, setProgressUpload] = useState(0);
+    const [photoString, setPhotoString] = useState('');
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -54,6 +55,8 @@ export const Form = () => {
     }
 
     const handleDropzoneSubmit = async () => {
+        setPhotoString(URL.createObjectURL(acceptedFiles[0]));
+
         const formData = new FormData();
         formData.append('file', acceptedFiles[0]);
         formData.append('legend', legend);
@@ -106,6 +109,11 @@ export const Form = () => {
             <div>
                 {progressUpload.toFixed(0)} / 100
             </div>
+            {
+                photoString && 
+                <img src={photoString} className="max-w-80"  />
+            }
+            
         </div>
     )
 }
