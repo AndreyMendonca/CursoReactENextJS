@@ -13,6 +13,11 @@ export const GridItem = ({ item, color }: Props) => {
                 {item.icon === 'down' && <img src="/down.png" width="30" />}
             </div>
             <div className="text-2xl font-bold mt-1">{item.title}</div>
+            {item.yourImc &&
+                <div className="text-xl mt-2">
+                    Seu IMC é de <strong>{item.yourImc.toFixed(2)}</strong>  kg/m2
+                </div>
+            }
             <div className="text-sm mt-2">
                 <>
                     IMC está entre <strong>{item.imc[0]}</strong> e <strong>{item.imc[1]}</strong>
