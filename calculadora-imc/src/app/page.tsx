@@ -1,4 +1,6 @@
 'use client'
+import { GridItem } from '@/components/grid-item';
+import { levels } from '@/helpers/imc';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -42,8 +44,14 @@ const Page = () => {
                     />
                     <button onClick={handleCalculateButton} className='bg-sky-700 text-white w-full text-2xl py-3 rounded-2xl transition-all duration-[200ms] cursor-pointer mt-10 hover:opacity-70'>Calcular</button>
                 </div>
-                <div className="flex-1 ml-10">
-                    /* lado esquerdo */
+                <div className="flex flex-1 ml-10">
+                    <div className="flex-1 grid grid-cols-2 gap-5">
+                        {levels.map((item, key)=>(
+                            <GridItem key={key} item={item} color={item.color} />
+                        ))
+
+                        }
+                    </div>
                 </div>
             </div>
         </div>
