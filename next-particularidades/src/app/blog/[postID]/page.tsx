@@ -1,4 +1,5 @@
 import { Post } from "@/type/post";
+import { Metadata } from "next";
 
 type Props = {
     params: {
@@ -6,8 +7,17 @@ type Props = {
     };
 };
 
+export const generateMetadata = async ({params}:Props): Promise<Metadata> => {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.postID}`);
+
+    const post: Post = await response.json();
+
+    return {
+        title: post.title
+    }
+}
+
 const Page = async ({ params }: Props) => {
-    console.log(params.postID)
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.postID}`);
 
     if (!response.ok) {
