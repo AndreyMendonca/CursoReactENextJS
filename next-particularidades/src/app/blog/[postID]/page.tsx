@@ -37,7 +37,7 @@ const Page = async ({ params }: Props) => {
 
 export default Page;
 
-
+//rotas dinamicas estáticas, o next faz a requisição e deixa salvo os dados
 export const generateStaticParams = async () => {
     const postReq = await fetch('https://jsonplaceholder.typicode.com/posts');
     const posts: Post[] = await postReq.json();
